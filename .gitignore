@@ -1,0 +1,27 @@
+# Node.js dependencies
+node_modules/
+
+# Build outputs
+build/
+dist/
+
+# Environment files (sensitive data)
+.env
+
+# Logs
+*.log
+*.log.*
+
+# Operating system files
+.DS_Store
+Thumbs.db
+
+# IDE/editor files
+.vscode/
+.idea/
+
+# Cache files
+.cache/
+
+# Temporary files
+*.tmp
