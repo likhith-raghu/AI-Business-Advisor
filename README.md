@@ -8,3 +8,12 @@ backend: The server-side logic and API.
 frontend: Frontend code for the website (HTML, CSS, JS, React).
 
 assets: Images, videos, or other static resources.
+
+
+
+### Prerequisites
+
+- **Node.js** (>= 16.0.0)
+- **npm** or **yarn** package manager
+- **Supabase** account (for database and storage)
+- **Clerk** account (for OAuth authentication)
