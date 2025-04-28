@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to POSSPOLE</title>
+    <link rel="stylesheet" href="../css/login.css">
+    <!-- Update Clerk SDK source -->
+    <script src="https://cdn.jsdelivr.net/npm/@clerk/clerk-js@latest/dist/clerk.browser.js"></script>
+</head>
+<body>
+     <!-- Header with logo and text -->
+     <header>
+        <div class="logo-container">
+            <img src="../assets/logo.png" alt="POSSPole Logo" class="logo">
+            <span class="brand-name">POSSPOLE</span>
+        </div>
+    </header>
+
+    <!-- Login Form -->
+    <div class="login-container">
+        <h2>Welcome Back</h2>
+        <div id="clerk-sign-in"></div>
+        <div class="auth-links">
+            <span>Don't have an account? <a href="signup.html">Sign Up</a></span>
+        </div>
+    </div>
+
+    <script>
+        const clerkPublishableKey = 'pk_test_cHVyZS1zbHVnLTk3LmNsZXJrLmFjY291bnRzLmRldiQ';
+        
+        window.addEventListener('load', async function() {
+            try {
+                const clerk = new Clerk(clerkPublishableKey);
+                await clerk.load();
+                
+                const signInComponent = await clerk.mountSignIn(document.getElementById('clerk-sign-in'), {
+                    appearance: {
+                        elements: {
+                            rootBox: {
+                                boxShadow: 'none',
+                                width: '100%'
+                            },
+                            card: {
+                                border: 'none',
+                                boxShadow: 'none',
+                                backgroundColor: 'transparent'
+                            }
+                        }
+                    }
+                });
+
+                if (clerk.session) {
+                    window.location.href = '/dashboard';
+                }
+            } catch (error) {
+                console.error('Error loading Clerk:', error);
+                document.getElementById('clerk-sign-in').innerHTML = 
+                    '<div style="color: red; text-align: center; margin-top: 20px;">Error initializing sign-in. Please try again later.</div>';
+            }
+        });
+    </script>
+</body>
+</html>

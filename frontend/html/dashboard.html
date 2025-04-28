@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - POSSPOLE</title>
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <script src="https://clerk.browser.accounts.dev/clerk.browser.js"></script>
+    <script src="../js/auth.js"></script>
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <img src="../../assets/logo.png" alt="POSSPole Logo" class="logo">
+            <span class="brand-name">POSSPOLE</span>
+        </div>
+        <nav>
+            <a href="#" class="active">Dashboard</a>
+            <a href="#">Analytics</a>
+         <a href="#">Settings</a>
+            <button class="sign-out-btn">Sign Out</button>
+            <span class="user-name"></span>
+        </nav>
+    </header>
+
+    <main class="dashboard-container">
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-value">84%</div>
+                <div class="stat-label">Performance</div>
+                <div class="stat-graph">
+                    <div class="graph-bar" style="width: 84%"></div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">$12.4K</div>
+                <div class="stat-label">Revenue</div>
+                <div class="stat-graph circular-progress"></div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">1,234</div>
+                <div class="stat-label">Active Users</div>
+                <div class="stat-graph wave-animation"></div>
+            </div>
+        </div>
+
+        <div class="visualization-grid">
+            <div class="viz-card">
+                <h3>Activity Overview</h3>
+                <div class="abstract-chart">
+                    <div class="chart-bar" style="height: 60%"></div>
+                    <div class="chart-bar" style="height: 80%"></div>
+                    <div class="chart-bar" style="height: 40%"></div>
+                    <div class="chart-bar" style="height: 90%"></div>
+                    <div class="chart-bar" style="height: 70%"></div>
+                </div>
+            </div>
+            <div class="viz-card">
+                <h3>Distribution</h3>
+                <div class="abstract-circles">
+                    <div class="circle" style="--size: 120px; --delay: 0s"></div>
+                    <div class="circle" style="--size: 80px; --delay: 0.2s"></div>
+                    <div class="circle" style="--size: 60px; --delay: 0.4s"></div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../js/dashboard.js"></script>
+</body>
+</html>

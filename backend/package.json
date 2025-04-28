@@ -1,0 +1,11 @@
+{
+  "name": "ai-business-advisor-backend",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "@clerk/clerk-sdk-node": "^4.10.15"
+  }
+}
