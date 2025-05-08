@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - POSSPOLE</title>
+    <link rel="stylesheet" href="./dashboard.css">
+    <script src="https://cdn.jsdelivr.net/npm/@clerk/clerk-js@latest/dist/clerk.browser.js"></script>
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo-container">
+                <img src="/assets/logo.png" alt="POSSPOLE Logo" class="logo">
+                <h1>POSSPOLE</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li class="active"><a href="#"><i class="fas fa-home"></i> Dashboard</a></li>
+                    <li><a href="#"><i class="fas fa-chart-bar"></i> Analytics</a></li>
+                    <li><a href="#"><i class="fas fa-users"></i> Customers</a></li>
+                    <li><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header>
+                <div class="header-content">
+                    <h2>Dashboard</h2>
+                    <div id="user-button"></div>
+                </div>
+            </header>
+
+            <!-- Dashboard Content -->
+            <div class="dashboard-grid">
+                <!-- Stats Cards -->
+                <div class="stats-card">
+                    <h3>Total Sales</h3>
+                    <p class="stats-number">$24,500</p>
+                    <span class="trend positive">+15%</span>
+                </div>
+                <div class="stats-card">
+                    <h3>Total Orders</h3>
+                    <p class="stats-number">156</p>
+                    <span class="trend positive">+8%</span>
+                </div>
+                <div class="stats-card">
+                    <h3>New Customers</h3>
+                    <p class="stats-number">64</p>
+                    <span class="trend negative">-3%</span>
+                </div>
+                <div class="stats-card">
+                    <h3>Average Order</h3>
+                    <p class="stats-number">$157</p>
+                    <span class="trend positive">+12%</span>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        const initDashboard = async () => {
+            const clerkPubKey = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
+            
+            if (!clerkPubKey) {
+                console.error('Missing Publishable Key');
+                window.location.href = '/';
+                return;
+            }
+
+            try {
+                const clerk = new Clerk(clerkPubKey);
+                await clerk.load();
+
+                if (!clerk.user) {
+                    window.location.href = '/';
+                    return;
+                }
+
+                // Mount the user button
+                const userButtonDiv = document.getElementById('user-button');
+                clerk.mountUserButton(userButtonDiv);
+
+            } catch (error) {
+                console.error('Error initializing dashboard:', error);
+                window.location.href = '/';
+            }
+        };
+
+        initDashboard();
+    </script>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign Up - POSSPOLE</title>
+    <link rel="stylesheet" href="/src/style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/@clerk/clerk-js@latest/dist/clerk.browser.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <div id="sign-up"></div>
+    </div>
+    <script type="module">
+      const initializeSignUp = async () => {
+        const clerkPubKey = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
+
+        if (!clerkPubKey) {
+          console.error('Missing Publishable Key');
+          document.getElementById('app').innerHTML = `
+            <div style="color: red; text-align: center; margin-top: 50px;">
+              Error: Clerk configuration is missing. Please check your environment variables.
+            </div>
+          `;
+        } else {
+          try {
+            const clerk = new Clerk(clerkPubKey, {
+              appearance: {
+                layout: {
+                  helpPageUrl: "/help",
+                  logoImageUrl: "/logo.png",
+                  privacyPageUrl: "/privacy",
+                  termsPageUrl: "/terms"
+                },
+                elements: {
+                  rootBox: {
+                    backgroundColor: "rgb(17, 17, 17)",
+                    margin: "auto"
+                  },
+                  card: {
+                    backgroundColor: "rgb(26, 26, 26)",
+                    borderRadius: "8px",
+                    boxShadow: "0 2px 4px rgba(0,0,0,0.2)"
+                  },
+                  formButtonPrimary: {
+                    backgroundColor: "rgb(99, 102, 241)",
+                    "&:hover": {
+                      backgroundColor: "rgb(79, 82, 221)"
+                    }
+                  }
+                }
+              }
+            });
+            await clerk.load();
+
+            const signUpDiv = document.getElementById('sign-up');
+            clerk.mountSignUp(signUpDiv, {
+              afterSignUpUrl: "/dashboard",
+              signInUrl: "/",
+            });
+          } catch (error) {
+            console.error('Error initializing Clerk:', error);
+            document.getElementById('app').innerHTML = `
+              <div style="color: red; text-align: center; margin-top: 50px;">
+                Error: Failed to initialize authentication. Please try again later.
+              </div>
+            `;
+          }
+        }
+      };
+
+      initializeSignUp();
+    </script>
+  </body>
+</html>
